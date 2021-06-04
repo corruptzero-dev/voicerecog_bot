@@ -10,7 +10,7 @@ import requests
 import speech_recognition as sr
 from pydub import AudioSegment
 
-token = '1638590590:AAGl7EIO8J6LHEb8Jvejz9bm09m5K9VsPA8'
+token = 'Тут токен'
 bot = telebot.TeleBot(token)
 
 @bot.message_handler(content_types=['voice'])
