@@ -10,10 +10,8 @@ import requests
 import speech_recognition as sr
 from pydub import AudioSegment
 
-
 token = '1638590590:AAGl7EIO8J6LHEb8Jvejz9bm09m5K9VsPA8'
 bot = telebot.TeleBot(token)
-
 
 @bot.message_handler(content_types=['voice'])
 def voice_handler(message):
@@ -22,11 +20,13 @@ def voice_handler(message):
 
   with open('voice.ogg','wb') as f:
     f.write(file.content)
-  ogg_audio = AudioSegment.from_file("/content/voice.ogg", format="ogg")
 
+  ogg_audio = AudioSegment.from_file("/content/voice.ogg", format="ogg")
   ogg_audio.export("voice.wav", format="wav")
+  
   AUDIO_FILE = '/content/voice.wav'
   r = sr.Recognizer()
+  
   with sr.AudioFile(AUDIO_FILE) as source:
       audio = r.record(source)  
   try:
