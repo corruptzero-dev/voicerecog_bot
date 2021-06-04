@@ -11,6 +11,7 @@ import speech_recognition as sr
 from pydub import AudioSegment
 
 token = 'Тут токен'
+
 bot = telebot.TeleBot(token)
 
 @bot.message_handler(content_types=['voice'])
@@ -33,9 +34,15 @@ def voice_handler(message):
     print(f'Вам написал пользователь с id {message.from_user.id}, имя: {message.from_user.first_name}')
     print("Он сказал: " + r.recognize_google(audio, language="ru"))
     bot.send_message(message.from_user.id, ("Вы сказали: " + r.recognize_google(audio, language="ru")))
+    if "привет" in r.recognize_google(audio, language="ru").lower().split():
+      bot.send_message(message.from_user.id, "И Вам привет! =)")
+    if "дела" in r.recognize_google(audio, language="ru").lower().split():
+      bot.send_message(message.from_user.id, "Дела отлично, вот Ваш голос распознаю)")
   except sr.UnknownValueError:
-      print("Не удалось распознать голос. Повторите попытку.")
+      print("Его голос не удалось распознать.")
+      bot.send_message(message.from_user.id, "Не удалось распознать голос. Повторите попытку.")
   except sr.RequestError as e:
-      print("Произошла ошибка. Попробуйте еще раз.")
+      print("Произошла ошибка.")
+      bot.send_message(message.from_user.id, "Произошла ошибка. Попробуйте еще раз.")
  
 bot.polling()
