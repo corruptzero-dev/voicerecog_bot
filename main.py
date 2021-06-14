@@ -1,10 +1,4 @@
-# ____________Модули___________
-# pip install pytelegrambotapi - для тг бота
-# pip install SpeechRecognition - для распознавания голоса
-# pip install pydub - для конвертации формата ogg (голосовое сообщение) в wav для обработки SR
 
-
-#____________Код_____________
 import telebot
 import requests
 import speech_recognition as sr
@@ -37,7 +31,7 @@ def voice_handler(message):
     if "привет" in r.recognize_google(audio, language="ru").lower().split():
       bot.send_message(message.from_user.id, "И Вам привет! =)")
     if "дела" in r.recognize_google(audio, language="ru").lower().split():
-      bot.send_message(message.from_user.id, "Дела отлично, вот Ваш голос распознаю)")
+      bot.send_message(message.from_user.id, "Дела отлично, вот Ваш голос распознаю.")
   except sr.UnknownValueError:
       print("Его голос не удалось распознать.")
       bot.send_message(message.from_user.id, "Не удалось распознать голос. Повторите попытку.")
